@@ -1,0 +1,159 @@
+
+// type CanvasProps = React.DetailedHTMLProps<React.CanvasHTMLAttributes<HTMLCanvasElement>, 
+//     HTMLCanvasElement
+// > & {drawGrid: (canvas:HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void
+//      drawPoints:(ctx: CanvasRenderingContext2D) => void
+//     };
+
+// const Canvas: React.FC<CanvasProps> = ({drawPoints,drawGrid , ...props}) =>{
+//     const canvasRef = useRef<HTMLCanvasElement | null>(null)
+
+//     const roundRect = (ctx: any ,x:number, y:number, w:number, h:number, r?:number) => {
+
+//         let radius = 25;
+   
+//         ctx.beginPath();
+//         ctx.moveTo(x+ (r || radius), y);
+//         ctx.lineWidth = 5;
+//         ctx.arcTo(x+w, y, s  x+w, y+h, (r || radius)); // Top right radius 
+//         ctx.arcTo(x+w, y+h, x,   y+h, (r || radius));
+//         ctx.arcTo(x,   y+h, x,   y,   (r || radius));
+//         ctx.arcTo(x,   y,   x+w, y,   (r || radius));
+//         ctx.closePath();
+//         ctx.lineWidth=5;
+//         ctx.fillStyle="#BA8C63"
+//         ctx.fill()
+//         ctx.strokeStyle = "#260d03"
+//         ctx.stroke();
+      
+//     }
+
+    
+
+//     useEffect(()=>{
+//         // console.log(props.width)
+//         const canvas = canvasRef.current;
+
+//         if(!canvas) return;
+
+//         const ctx = canvas.getContext('2d');
+
+//         if(!ctx) return;
+
+//         ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+        
+
+//         // Square 4 point
+//         let squareFourPointWidth = 180
+
+    
+
+//         roundRect(ctx, 5, 5, squareFourPointWidth, squareFourPointWidth)
+//         roundRect(ctx, 5, 2*95 + 5, squareFourPointWidth, squareFourPointWidth)
+//         roundRect(ctx, 3*95 + 5, 95 + 5, squareFourPointWidth, squareFourPointWidth)
+//         roundRect(ctx, 5*95 + 5, 4*95 + 5, squareFourPointWidth, squareFourPointWidth)
+//         roundRect(ctx, 6*95 + 5, 6*95 + 5, squareFourPointWidth, squareFourPointWidth)
+
+
+    
+
+//         // rect 3 point
+
+//         let rectThreePointWidth = 90
+
+//         roundRect(ctx, 190, 5, rectThreePointWidth, rectThreePointWidth*3)
+//         roundRect(ctx, 285 + 5, 5, rectThreePointWidth*3, rectThreePointWidth)
+//         roundRect(ctx, 5, 475 + 5, rectThreePointWidth, rectThreePointWidth*3)
+//         roundRect(ctx, 475 + 5, 285 + 5, rectThreePointWidth*3, rectThreePointWidth)
+
+//         //Rect 2 point
+
+//         let rectTwoPointWidth = 180
+
+//         roundRect(ctx, 5, 380, rectTwoPointWidth, rectTwoPointWidth/2)
+//         roundRect(ctx, 5*95, 95 + 5, rectTwoPointWidth/2, rectTwoPointWidth)
+//         roundRect(ctx, 3*95, 5*95 + 5, rectTwoPointWidth, rectTwoPointWidth/2)
+//         roundRect(ctx, 7*95, 4*95 + 5, rectTwoPointWidth/2, rectTwoPointWidth)
+
+//         //Rect 6point
+//         let rectSixPointWidth = 270
+//         roundRect(ctx, 2*95 + 5, 3*95 + 5, rectSixPointWidth, rectSixPointWidth - 90)
+//         roundRect(ctx, 95 + 5, 5*95 + 5, rectSixPointWidth - 90, rectSixPointWidth)
+//         roundRect(ctx, 3*95 + 5, 6*95 + 5, rectSixPointWidth, rectSixPointWidth - 90)
+//         roundRect(ctx, 6*95 + 5, 5, rectSixPointWidth - 90, rectSixPointWidth)
+
+
+           
+
+//         //Points
+//         drawPoints(ctx)
+
+//         //Grid
+//         drawGrid(canvas, ctx)
+        
+
+        
+//     },[drawGrid, drawPoints])
+
+//     return (
+//     <canvas width={props.width} height={props.height} ref={canvasRef}></canvas>
+//   )
+// }
+
+// export default Canvas
+
+
+
+// import React from 'react'
+// import Canvas from '../canvas/Canvas'
+
+// const WIDTH = 950;
+// const HEIGHT = 950
+
+
+// const Map = () => {
+
+//     let ecart = 95;
+
+    
+
+//     const grid = (canvas: HTMLCanvasElement,ctx: CanvasRenderingContext2D) =>{
+//         for(let i = ecart; i < canvas.width; i += ecart){
+//             ctx.beginPath();
+//             ctx.moveTo(0,i)
+//             ctx.lineTo(canvas.width, i);
+//             ctx.lineWidth=1;
+//             ctx.strokeStyle ="black"
+//             ctx.stroke();
+//         }
+
+//         for(let i = ecart; i < canvas.height; i += ecart){
+//             ctx.beginPath();
+//             ctx.moveTo(i,0)
+//             ctx.lineTo(i, canvas.height);
+//             ctx.stroke();
+//         }
+//     }
+
+//     const cerclePoints = (ctx:CanvasRenderingContext2D) => {
+//         //cercle
+//         for(let i = 1; i < 16; i+=2){
+//             for(let j = 1; j < 16; j+=2){
+//                 ctx.beginPath();
+//                 ctx.arc(i*47.5, j*47.5, 15, 0, 2 * Math.PI);
+//                 ctx.fillStyle = "#140601"
+//                 ctx.fill();
+//             }
+//         }
+//     }
+
+
+//     return (
+//         <div>
+//         <Canvas drawPoints={cerclePoints} drawGrid={grid} width={WIDTH} height={HEIGHT}></Canvas>
+//         </div>
+//     )
+// }
+
+// export default Map
