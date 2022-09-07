@@ -20,9 +20,6 @@ const Canvas = forwardRef<HTMLCanvasElement, CanvasProps>(
             const canvas = (canvasRef as React.RefObject<HTMLCanvasElement>).current;
             if(!canvas) return
             
-            canvas.addEventListener('click', (e)=>{
-                console.log()
-            })
             
             const context = canvas.getContext('2d');
             if(!context) return
