@@ -1,10 +1,10 @@
 import React, {useRef, useEffect, forwardRef} from 'react'
 import * as S from './Canvas.styles'
 
-
+// Un type qui va nous permettre d'acceder au props du composant
 type CanvasProps =  React.DetailedHTMLProps<React.CanvasHTMLAttributes<HTMLCanvasElement>,  HTMLCanvasElement> &{
     draw : (ctx : CanvasRenderingContext2D) => void;
-}
+} 
 
 
 const Canvas = forwardRef<HTMLCanvasElement, CanvasProps>(
