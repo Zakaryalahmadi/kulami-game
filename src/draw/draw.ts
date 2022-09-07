@@ -1,3 +1,4 @@
+import board from './board';
 import points from './points';
 
 
@@ -8,6 +9,7 @@ interface DrawArgs{
 
 const draw = ({ctx, canvasRef}: DrawArgs) =>{
 
+    board(ctx)
     points(ctx, canvasRef)
     
     
