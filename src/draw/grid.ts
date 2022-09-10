@@ -1,9 +1,9 @@
-const CANVAS_WIDTH = 950
-const CANVAS_HEIGHT = 950
+const CANVAS_WIDTH = 800
+const CANVAS_HEIGHT = 800
 
 const grid = (ctx: CanvasRenderingContext2D) =>{
     
-    let ecart = 95
+    let ecart = 80
     
         for(let i = ecart; i < CANVAS_WIDTH; i += ecart){
             ctx.beginPath();
