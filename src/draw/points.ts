@@ -5,10 +5,7 @@ class Point{
     coordonnees: number[][]
 
 
-    // coork: number[][]
-
-
-    CONSTANTE_POUR_POUVOIR_CENTRER = 47
+    CONSTANTE_POUR_POUVOIR_CENTRER = 47.5
     RADIUS = 15;
     POINTS_LEN = 16
     CANVAS_WIDTH = 950
@@ -19,8 +16,8 @@ class Point{
     pos_y: number
 
     constructor() {
-        this.x = 47
-        this.y = 47
+        this.x = 47.5
+        this.y = 47.5
         this.coordonnees = []
         // this.coork = []
         this.survol = false
@@ -71,51 +68,18 @@ class Point{
 
         if(!canvas )    return;
 
-        canvas.addEventListener('mousemove', (e)=>{
+        canvas.addEventListener('click', (e)=>{
                 e.preventDefault();
                 this.pos_x = Math.floor(e.clientX/100 + this.CONSTANTE_POUR_POUVOIR_CENTRER);
                 this.pos_y = Math.floor(e.clientY/100 + this.CONSTANTE_POUR_POUVOIR_CENTRER);
                 // let formuleX = 47 + 2*(this.pos_x - this.CONSTANTE_POUR_POUVOIR_CENTRER)*47;
                 // let formuleY = 47 + 2*(this.pos_y - this.CONSTANTE_POUR_POUVOIR_CENTRER)*47;
 
-                let mouseX = e.clientX;
-
-                let mouseY = e.clientY;
-
-
-                let formuleX = 47 
-                let formuleY = 47
-
               
                 console.log(this.pos_x - this.CONSTANTE_POUR_POUVOIR_CENTRER)
         
+                
 
-            
-                if(mouseX >= 10 && mouseX <= 90
-                    
-                    && mouseY >= 10 && mouseY <= 90){
-                                        
-                        ctx.restore();
-                        ctx.beginPath();
-                        
-                        ctx.arc(formuleX,formuleY, this.RADIUS, 0, 2 * Math.PI);
-                        ctx.fillStyle = "green"
-                        // ctx.strokeStyle="#08401f"
-                        
-                        ctx.fill();
-                        // ctx.stroke();
-
-
-        
-                    
-                }else{
-                    ctx.restore();
-                    ctx.beginPath();
-                    ctx.arc(formuleX,formuleY, this.RADIUS, 0, 2 * Math.PI);
-                    ctx.fillStyle = "#140601"
-                    
-                    ctx.fill();
-                }
 
                
         
