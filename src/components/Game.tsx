@@ -8,8 +8,7 @@ interface GameProps{}
 const Game: React.FC<GameProps> = ({}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
-    // console.log(canvasRef.current)
-
+    // console.log("canvas Ref", canvasRef.current)
     const drawGame = (ctx: CanvasRenderingContext2D)=>{
         draw({ctx, canvasRef})
     }
