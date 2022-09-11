@@ -1,52 +1,135 @@
-const CONSTANTE_POUR_POUVOIR_CENTRER = 47.5
-const RADIUS = 15;
-const POINTS_LEN = 16
+class Point{
+    private x:number
+    private y:number
 
-const points = (ctx: CanvasRenderingContext2D, canvasRef:React.RefObject<HTMLCanvasElement>) =>{
-    let coordonnees: number[][] = [];
+    private coordonnees: number[][]
 
-    for(let i = 1; i < POINTS_LEN; i+=2){
+    private playerOnePlayed = false
+    private colorPlayerOne = "red";
+    private colorPlayerTwo = "grey"
 
-        
-        for(let j = 1; j < POINTS_LEN; j+=2){
-            
-            ctx.beginPath();
-            ctx.arc(i*CONSTANTE_POUR_POUVOIR_CENTRER, j*CONSTANTE_POUR_POUVOIR_CENTRER, RADIUS, 0, 2 * Math.PI);
-            ctx.fillStyle = "#140601"
-            ctx.fill();
-            
-            coordonnees.push([Math.floor(i*CONSTANTE_POUR_POUVOIR_CENTRER/100),Math.floor(j*CONSTANTE_POUR_POUVOIR_CENTRER/100)])
-            
-            
-        }
+    DEVMODE = true
+
+    GRID_SIZE = 80
 
 
+    // coork: number[][]
+
+
+    CONSTANTE_POUR_POUVOIR_CENTRER = 40
+    RADIUS = 15;
+    POINTS_LEN = 16
+    CANVAS_WIDTH = 800
+
+    survol: boolean
+
+    private pos_x: number 
+    private pos_y: number
+
+    constructor() {
+        this.x = 47
+        this.y = 47
+        this.coordonnees = []
+        // this.coork = []
+        this.survol = false
+        this.pos_x = 0
+        this.pos_y = 0 
     }
 
-    // console.log(canvasRef.current)
 
-    console.log(coordonnees[0])
+    includesPerso(tab: number[][], x:number,y:number){
+        for(let i = 0; i < tab.length; i++){
+            if((tab[i].includes(x) && tab[i].includes(y))
+            || (tab[i].includes(y) && tab[i].includes(x))){
+                return true
+            }
+        }
 
-    let canvas = canvasRef.current;
+        return false
+    }
 
-    if(!canvas) return;
 
-    // for(let i = 0; i < )
+    drawCercle(ctx:CanvasRenderingContext2D){
+        for(let i = 1; i < this.POINTS_LEN; i+=2){
 
-    // canvas.addEventListener('click', (e)=>{
-    //     let pos_x = Math.floor(e.clientX/100);
-    //     let pos_y = Math.floor(e.clientY/100);
+            
+            for(let j = 1; j < this.POINTS_LEN; j+=2){
+                
+                ctx.beginPath();
+                ctx.arc(i*this.CONSTANTE_POUR_POUVOIR_CENTRER, j*this.CONSTANTE_POUR_POUVOIR_CENTRER, this.RADIUS, 0, 2 * Math.PI);
+                ctx.fillStyle = "#140601"
+                ctx.fill();
+                
+                this.coordonnees.push([i*(this.CONSTANTE_POUR_POUVOIR_CENTRER),j*(this.CONSTANTE_POUR_POUVOIR_CENTRER)])
+                
+                // this.coork.push([i*(this.CONSTANTE_POUR_POUVOIR_CENTRER),j*(this.CONSTANTE_POUR_POUVOIR_CENTRER)])
+            }
 
-    //     if(coordonnees.includes([0,0])){
-    //         console.log('ok')
-    //     }
 
-    // })
+        }
+    }
+
+    draw(ctx: CanvasRenderingContext2D, canvasRef:React.RefObject<HTMLCanvasElement>){
+
+
+        this.drawCercle(ctx)
+        
+        
+
+        // console.log(this.coordonnees)
+        
+        let canvas = canvasRef.current;
+
+        if(!canvas ) return;
+
+        const rect = canvas.getBoundingClientRect();
+
+
+
+        canvas.addEventListener('click', (e)=>{
+
+            
+
+            // console.log(this.coordonnees)
+            this.pos_x = Math.floor((e.clientX - rect.left)/this.GRID_SIZE);
+            this.pos_y = Math.floor((e.clientY - rect.top)/this.GRID_SIZE);
+
+
+            // let formuleX = this.CONSTANTE_POUR_POUVOIR_CENTRER + 2*(this.pos_x - this.CONSTANTE_POUR_POUVOIR_CENTRER)*this.CONSTANTE_POUR_POUVOIR_CENTRER;
+            // let formuleY = this.CONSTANTE_POUR_POUVOIR_CENTRER + 2*(this.pos_y - this.CONSTANTE_POUR_POUVOIR_CENTRER)*this.CONSTANTE_POUR_POUVOIR_CENTRER;
+    
+            
+
+            console.log(this.pos_x, this.pos_y)
+            // console.log(this.coordonnees)
+            
+
+
+            // if(this.DEVMODE){
+            //     ctx.fillText("Hello World!", , );
+            //     ctx.font = "2px Georgia";
+            // }
+            
+               
+        
+        })
+
+        
+
+           
+   
+        
+
+       
+
+        
+
+
+        
+    }
 
     
 
-    // console.table(coordonnees)
-    
 }
 
-export default points
+export default Point
