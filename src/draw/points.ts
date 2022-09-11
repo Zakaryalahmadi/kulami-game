@@ -1,35 +1,46 @@
-const CONSTANTE_POUR_POUVOIR_CENTRER = 47.5
-const RADIUS = 15;
-const POINTS_LEN = 16
+class Point{
+    private x:number
+    private y:number
 
-const points = (ctx: CanvasRenderingContext2D, canvasRef:React.RefObject<HTMLCanvasElement>) =>{
-    let coordonnees: number[][] = [];
+    private coordonnees: number[][]
 
+    private playerOnePlayed = false
+    private colorPlayerOne = "red";
+    private colorPlayerTwo = "grey"
 
-    let coork: number[][] = [];
+    DEVMODE = true
 
-    for(let i = 1; i < POINTS_LEN; i+=2){
-
-        
-        for(let j = 1; j < POINTS_LEN; j+=2){
-            
-            ctx.beginPath();
-            ctx.arc(i*CONSTANTE_POUR_POUVOIR_CENTRER, j*CONSTANTE_POUR_POUVOIR_CENTRER, RADIUS, 0, 2 * Math.PI);
-            ctx.fillStyle = "#140601"
-            ctx.fill();
-            
-            coordonnees.push([Math.floor(i*CONSTANTE_POUR_POUVOIR_CENTRER/100),Math.floor(j*CONSTANTE_POUR_POUVOIR_CENTRER/100)])
-            
-            coork.push([i*CONSTANTE_POUR_POUVOIR_CENTRER,j*CONSTANTE_POUR_POUVOIR_CENTRER])
-        }
+    GRID_SIZE = 80
 
 
+    // coork: number[][]
+
+
+    CONSTANTE_POUR_POUVOIR_CENTRER = 40
+    RADIUS = 15;
+    POINTS_LEN = 16
+    CANVAS_WIDTH = 800
+
+    survol: boolean
+
+    private pos_x: number 
+    private pos_y: number
+
+    constructor() {
+        this.x = 47
+        this.y = 47
+        this.coordonnees = []
+        // this.coork = []
+        this.survol = false
+        this.pos_x = 0
+        this.pos_y = 0 
     }
 
-    
-    function includesPerso(tab: number[][], x:number,y:number){
+
+    includesPerso(tab: number[][], x:number,y:number){
         for(let i = 0; i < tab.length; i++){
-            if(tab[i].includes(x) && tab[i].includes(y)){
+            if((tab[i].includes(x) && tab[i].includes(y))
+            || (tab[i].includes(y) && tab[i].includes(x))){
                 return true
             }
         }
@@ -38,53 +49,87 @@ const points = (ctx: CanvasRenderingContext2D, canvasRef:React.RefObject<HTMLCan
     }
 
 
-    // coordonnees.push([0,0], [0,1], [0,2], [1,2])
-
-    // console.log(canvasRef.current)
-
-    // console.log(includesPerso(coordonnees, 1 ,2))
-
-    let canvas = canvasRef.current;
-
-    if(!canvas) return;
-
-    // for(let i = 0; i < )
-
-    console.log(coork)
-   
-
-    canvas.addEventListener('click', (e)=>{
-        e.preventDefault();
-        let pos_x = Math.floor(e.clientX/100);
-        let pos_y = Math.floor(e.clientY/100);
-
-
-        if(includesPerso(coordonnees, pos_x, pos_y)){
-            // alert('la position que vous avez:' + pos_x + ' ' + pos_y)
-            console.log("pos =" ,pos_x, pos_y)
-            
+    drawCercle(ctx:CanvasRenderingContext2D){
+        for(let i = 1; i < this.POINTS_LEN; i+=2){
 
             
-            ctx.beginPath();
-            // for(let i = 0; i < coork.length; i++){
-            //     for(let j = 0; j < coork.length; j++){
-                    
-            //     }
-            // }
+            for(let j = 1; j < this.POINTS_LEN; j+=2){
+                
+                ctx.beginPath();
+                ctx.arc(i*this.CONSTANTE_POUR_POUVOIR_CENTRER, j*this.CONSTANTE_POUR_POUVOIR_CENTRER, this.RADIUS, 0, 2 * Math.PI);
+                ctx.fillStyle = "#140601"
+                ctx.fill();
+                
+                this.coordonnees.push([i*(this.CONSTANTE_POUR_POUVOIR_CENTRER),j*(this.CONSTANTE_POUR_POUVOIR_CENTRER)])
+                
+                // this.coork.push([i*(this.CONSTANTE_POUR_POUVOIR_CENTRER),j*(this.CONSTANTE_POUR_POUVOIR_CENTRER)])
+            }
 
-            // ctx.arc((1+pos_x)*coork[pos_x][pos_y],coork[pos_x][pos_y], RADIUS, 0, 2 * Math.PI);
 
-            ctx.fillStyle = "green"
-            ctx.fill();
         }
+    }
+
+    draw(ctx: CanvasRenderingContext2D, canvasRef:React.RefObject<HTMLCanvasElement>){
+
+
+        this.drawCercle(ctx)
+        
         
 
-    })
+        // console.log(this.coordonnees)
+        
+        let canvas = canvasRef.current;
+
+        if(!canvas ) return;
+
+        const rect = canvas.getBoundingClientRect();
+
+
+
+        canvas.addEventListener('click', (e)=>{
+
+            
+
+            // console.log(this.coordonnees)
+            this.pos_x = Math.floor((e.clientX - rect.left)/this.GRID_SIZE);
+            this.pos_y = Math.floor((e.clientY - rect.top)/this.GRID_SIZE);
+
+
+            // let formuleX = this.CONSTANTE_POUR_POUVOIR_CENTRER + 2*(this.pos_x - this.CONSTANTE_POUR_POUVOIR_CENTRER)*this.CONSTANTE_POUR_POUVOIR_CENTRER;
+            // let formuleY = this.CONSTANTE_POUR_POUVOIR_CENTRER + 2*(this.pos_y - this.CONSTANTE_POUR_POUVOIR_CENTRER)*this.CONSTANTE_POUR_POUVOIR_CENTRER;
+    
+            
+
+            console.log(this.pos_x, this.pos_y)
+            // console.log(this.coordonnees)
+            
+
+
+            // if(this.DEVMODE){
+            //     ctx.fillText("Hello World!", , );
+            //     ctx.font = "2px Georgia";
+            // }
+            
+               
+        
+        })
+
+        
+
+           
+   
+        
+
+       
+
+        
+
+
+        
+    }
 
     
 
-    // console.table(coordonnees)
-    
 }
 
-export default points
+export default Point

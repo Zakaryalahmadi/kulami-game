@@ -1,5 +1,7 @@
-import board from './board';
-import points from './points';
+import Board from './board';
+import grid from './grid';
+import Point from './points';
+
 
 
 interface DrawArgs{
@@ -8,10 +10,11 @@ interface DrawArgs{
 }
 
 const draw = ({ctx, canvasRef}: DrawArgs) =>{
-
-    board(ctx)
-    points(ctx, canvasRef)
-    
+    let board = new Board()
+    board.draw(ctx)
+    grid    (ctx)
+    let points = new Point()
+    points.draw(ctx, canvasRef)
     
 }
 
