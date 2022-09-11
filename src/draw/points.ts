@@ -100,8 +100,8 @@ class Point{
     
             
 
-            // console.log(this.pos_x, this.pos_y)
-            console.log(this.coordonnees)
+            console.log(this.pos_x, this.pos_y)
+            // console.log(this.coordonnees)
             
 
 
